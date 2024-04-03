@@ -1,5 +1,6 @@
 class AppRoutes{
-  static const homePage = '/homePage';
-  static const loginPage = '/loginPage';
-  static const signupPage = '/signupPage';
+  static const splash = '/splash';
+  static const home = '/home';
+  static const login = '/login';
+  static const signup = '/signup';
 }

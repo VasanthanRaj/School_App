@@ -1,13 +1,36 @@
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:school_app/modules/login/login_binding.dart';
+import 'package:school_app/modules/login/login_page.dart';
+import 'package:school_app/modules/signup/signup_binding.dart';
+import 'package:school_app/modules/signup/signup_page.dart';
+import 'package:school_app/routes/app_routes.dart';
 
-import '../pages/home_page.dart';
-import '../pages/login_page.dart';
-import '../pages/signup_page.dart';
+import '../modules/home/home_binding.dart';
+import '../modules/home/home_page.dart';
+import '../modules/splash/splash_binding.dart';
+import '../modules/splash/splash_page.dart';
 
 class AppPages {
-  static final pageRoutes = <String, WidgetBuilder> {
-    '/homePage': (context) => const HomePage(),
-    '/loginPage': (context) => const LoginPage(),
-    '/signupPage': (context) => const SignupPage(),
-  };
+  static final List<GetPage> pages = [
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => SplashPage(),
+      binding: SplashBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.home,
+      page: () => HomePage(),
+      bindings: [HomeBinding()],
+    ),
+    GetPage(
+      name: AppRoutes.login,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.signup,
+      page: () => SignUpPage(),
+      binding: SignUpBinding(),
+    ),
+  ];
 }

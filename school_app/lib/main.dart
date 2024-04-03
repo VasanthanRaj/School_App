@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:school_app/themes/colors_theme.dart';
+import 'modules/splash/splash_binding.dart';
+import 'modules/splash/splash_page.dart';
 import 'routes/app_pages.dart';
+import 'utils/dependency_injection.dart';
 
-void main() {
+Future<void> main() async {
+
+  //dependencies injections
+  DependencyInjection.init();
+
+  //screen rotation disabled
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'School',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      initialRoute: '/loginPage',
-      routes: AppPages.pageRoutes,
+      theme: ThemeColor().themeData,
+      home: SplashPage(),
+      initialBinding: SplashBinding(),
+      getPages: AppPages.pages,
     );
   }
 }
