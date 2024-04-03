@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/providers/AuthenticationAPI.dart';
+import '../../data/providers/GetAPI.dart';
 import '../../routes/app_routes.dart';
 import '../../utils/local_storage.dart';
 import '../../widgets/snackbars.dart';
@@ -12,7 +13,7 @@ import '../../widgets/snackbars.dart';
 class LoginController extends GetxController {
   //API provider
   AuthenticationAPI authenticationApi = AuthenticationAPI();
-
+  final GetAPI getAPI = Get.find<GetAPI>();
 
   final LocalStorage localStorage = Get.find<LocalStorage>();
 
@@ -34,8 +35,8 @@ class LoginController extends GetxController {
     isLoading = true;
     update();
 
-    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(
-        emailController.text)) {
+    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$')
+        .hasMatch(emailController.text)) {
       errorEmail = 'Please enter a valid email address';
       isLoading = false;
     } else {
@@ -47,23 +48,15 @@ class LoginController extends GetxController {
         var result = jsonDecode(results);
 
         if (result['status'] == 1) {
-          isLoading = false;
           print(result['data']['token']);
           SharedPreferences preferences = await SharedPreferences.getInstance();
-          preferences.setString(
-              'token', result['data']['token']
-          );
-          preferences.setString(
-              'userId', result['data']['id'].toString()
-          );
+          preferences.setString('token', result['data']['token']);
+          preferences.setString('userId', result['data']['id'].toString());
           localStorage.setLocalData(
               tokenLocal: result['data']['token'],
               userIdLocal: result['data']['id'].toString());
           update();
-          SnackNotification.success(
-            message: result['message'],
-          );
-          Get.offNamedUntil(AppRoutes.home, (_) => false);
+          userDetails();
         } else if (result['status'] == 0) {
           isLoading = false;
           SnackNotification.error(
@@ -76,5 +69,51 @@ class LoginController extends GetxController {
       }
     }
     update();
+  }
+
+  void userDetails() async {
+    var results = await getAPI.userDetailsAPI();
+    if (results != null) {
+      storeUserData(
+          userName: results['name'] ?? '',
+          email: results['email'] ?? '',
+          image: results['imagepath'] ?? '',
+          phoneNumber: results['phonenumber'] ?? '',
+          address: results['address'] ?? '',
+          webUrl: results['weburl'] ?? '');
+    }
+  }
+
+  void storeUserData({
+    required String userName,
+    required String email,
+    required String image,
+    required String phoneNumber,
+    required String address,
+    required String webUrl,
+  }) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString('userName', userName);
+    preferences.setString('email', email);
+    preferences.setString('image', image);
+    preferences.setString('phoneNumber', phoneNumber);
+    preferences.setString('address', address);
+    preferences.setString('webUrl', webUrl);
+
+    isLoading = false;
+    localStorage.setuserDetails(
+        userNameLocal: userName,
+        emailLocal: email,
+        imageLocal: image,
+        phoneNumberLocal: phoneNumber,
+        addressLocal: address,
+        webUrlLocal: webUrl);
+
+    update();
+
+    SnackNotification.success(
+      message: "Logged in successfully",
+    );
+    Get.offNamedUntil(AppRoutes.home, (_) => false);
   }
 }

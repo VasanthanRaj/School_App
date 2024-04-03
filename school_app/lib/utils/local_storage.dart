@@ -7,6 +7,12 @@ class LocalStorage extends GetxService {
   RxString userId = ''.obs;
   RxString classId = ''.obs;
   RxString sectionId = ''.obs;
+  RxString userName = ''.obs;
+  RxString email = ''.obs;
+  RxString image = ''.obs;
+  RxString phoneNumber = ''.obs;
+  RxString address = ''.obs;
+  RxString webUrl = ''.obs;
 
   @override
   void onInit() {
@@ -20,6 +26,12 @@ class LocalStorage extends GetxService {
     userId = RxString(preferences.getString('userId') ?? '');
     classId = RxString(preferences.getString('classId') ?? '');
     sectionId = RxString(preferences.getString('sectionId') ?? '');
+    userName = RxString(preferences.getString('userName') ?? '');
+    email = RxString(preferences.getString('email') ?? '');
+    phoneNumber = RxString(preferences.getString('phoneNumber') ?? '');
+    image = RxString(preferences.getString('image') ?? '');
+    address = RxString(preferences.getString('address') ?? '');
+    webUrl = RxString(preferences.getString('webUrl') ?? '');
   }
 
   setClassData({
@@ -40,5 +52,21 @@ class LocalStorage extends GetxService {
   }) {
     token = RxString(tokenLocal);
     userId = RxString(userIdLocal);
+  }
+
+  setuserDetails({
+    required String userNameLocal,
+    required String emailLocal,
+    required String imageLocal,
+    required String phoneNumberLocal,
+    required String addressLocal,
+    required String webUrlLocal,
+}) {
+    userName = RxString(userNameLocal);
+    email = RxString(emailLocal);
+    image = RxString(imageLocal);
+    phoneNumber = RxString(phoneNumberLocal);
+    address = RxString(addressLocal);
+    webUrl = RxString(webUrlLocal);
   }
 }

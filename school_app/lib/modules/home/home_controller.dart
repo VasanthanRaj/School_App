@@ -12,12 +12,17 @@ import '../../utils/local_storage.dart';
 import '../../widgets/network_error_item.dart';
 
 class HomeController extends GetxController {
-
   //API
   final GetAPI getAPI = Get.find<GetAPI>();
 
+  //Local Storage
+  final LocalStorage localStorage = Get.find<LocalStorage>();
+
   //Lists
   List<ClassesModel> classModel = <ClassesModel>[].obs;
+
+  RxInt classId = 0.obs;
+  RxString className = ''.obs;
 
   bool isLoading = false;
 
@@ -31,15 +36,23 @@ class HomeController extends GetxController {
     isLoading = true;
     update();
     var results = await getAPI.classesAPI();
-    if(results != null) {
+    if (results != null) {
       var convertResult = jsonDecode(results);
       print(convertResult);
-      convertResult['posts'].forEach((result) => classModel.add(ClassesModel.fromJson(result)));
+      convertResult['posts']
+          .forEach((result) => classModel.add(ClassesModel.fromJson(result)));
       isLoading = false;
       update();
     } else {
       isLoading = false;
       update();
     }
+  }
+
+  void sectionNav({required int index}) {
+    classId = RxInt(classModel[index].id);
+    className = RxString(classModel[index].name);
+    update();
+    Get.toNamed(AppRoutes.section);
   }
 }

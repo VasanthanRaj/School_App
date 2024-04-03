@@ -1,7 +1,10 @@
 const baseUrl = 'http://3.110.157.225:3000/';
 
 const auth = 'authenticate';
-const classIndex = 'classes/index/';
+const classDetails = 'classes/index/';
+const getUserDetails = 'users/getbyid/';
+const sectionDetails = 'sections/index/';
+const studentsDetails = 'students/index/';
 const addUsers = 'users/add';
 const userIndex = 'users/index';
 
