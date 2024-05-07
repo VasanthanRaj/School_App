@@ -9,13 +9,15 @@ import 'utils/dependency_injection.dart';
 
 Future<void> main() async {
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   //dependencies injections
   DependencyInjection.init();
 
   //screen rotation disabled
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

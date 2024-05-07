@@ -1,6 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:school_app/modules/students/widget/student_card.dart';
 import 'package:school_app/themes/colors_theme.dart';
 import 'package:school_app/utils/image_assets.dart';
 import 'package:school_app/widgets/quiet_box.dart';
@@ -82,49 +83,101 @@ class StudentPage extends StatelessWidget {
                                           return const Divider();
                                         },
                                         itemBuilder: (context, index) {
-                                          return Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    width: 40,
-                                                    height: 40,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(40),
-                                                        color: Colors.black),
-                                                    child: SvgPicture.asset(
-                                                      SvgRes.noPhoto,
-                                                      width: 24,
-                                                      height: 24,
-                                                    )),
-                                                SizedBox(
-                                                  width: Get.width / 1.8,
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        controller
-                                                            .studentModel[index]
-                                                            .data
-                                                            .name,
-                                                        style: const TextStyle(
-                                                            fontSize: 14),
-                                                      ),
-                                                      const Text(
-                                                        "no Data",
-                                                        style: TextStyle(
-                                                            fontSize: 14),
-                                                      ),
-                                                    ],
+                                          return InkWell(
+                                            onTap: () => {
+                                              Get.dialog(
+                                                  StudentCard(index: index)),
+                                              print(index)
+                                            },
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 10),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  controller.studentModel[index]
+                                                              .imagePath !=
+                                                          ''
+                                                      ? ClipRRect(
+                                                        borderRadius: BorderRadius.circular(20),
+                                                        child: Image.network(
+                                                          controller
+                                                              .studentModel[
+                                                                  index]
+                                                              .imagePath,
+                                                          fit: BoxFit.cover,
+                                                          loadingBuilder:
+                                                              (context, child,
+                                                                  loadingProgress) {
+                                                            if (loadingProgress ==
+                                                                null) {
+                                                              debugPrint(
+                                                                  'image loading null');
+                                                              return child;
+                                                            }
+                                                            debugPrint(
+                                                                'image loading...');
+                                                            return const Center(
+                                                                child:
+                                                                    CircularProgressIndicator());
+                                                          },
+                                                          width: 40,
+                                                          height: 40,
+                                                        ),
+                                                      )
+                                                      : Container(
+                                                          width: 40,
+                                                          height: 40,
+                                                          padding:
+                                                              EdgeInsets.all(8),
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          40),
+                                                              color:
+                                                                  Colors.black),
+                                                          child:
+                                                              SvgPicture.asset(
+                                                            SvgRes.noPhoto,
+                                                            width: 10,
+                                                            height: 10,
+                                                          )),
+                                                  SizedBox(
+                                                    width: Get.width / 1.8,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          controller
+                                                              .studentModel[
+                                                                  index]
+                                                              .data
+                                                              .name,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 14),
+                                                        ),
+                                                        Text(
+                                                          controller
+                                                              .studentModel[
+                                                                  index]
+                                                              .data
+                                                              .roleNo,
+                                                          style: TextStyle(
+                                                              fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           );
                                         }),

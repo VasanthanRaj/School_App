@@ -29,6 +29,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     fetchClasses();
+    print(localStorage);
     super.onInit();
   }
 

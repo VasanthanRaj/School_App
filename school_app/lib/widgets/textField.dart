@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_app/themes/colors_theme.dart';
 
 class CommonTextField extends StatelessWidget {
   final keyboardType;
@@ -20,22 +21,24 @@ class CommonTextField extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: const EdgeInsets.only(left: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           width: Get.width,
           child: Text(
             labelText,
             textAlign: TextAlign.left,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 16,
+              fontWeight: FontWeight.w500
             ),
           ),
         ),
-        Card(
-          elevation: 5,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Container(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               color: Colors.white,
+              border: Border.all(color: ThemeColor.primary, width: 3),
               borderRadius: BorderRadius.circular(6.0),
             ),
             height: 45,
@@ -44,7 +47,6 @@ class CommonTextField extends StatelessWidget {
               keyboardType: keyboardType,
               controller: textController,
               decoration: const InputDecoration(
-                // hintText: hintText,
                 border: InputBorder.none,
               ),
             ),

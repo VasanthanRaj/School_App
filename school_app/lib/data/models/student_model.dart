@@ -8,8 +8,9 @@ class StudentModel {
   final String modified;
   final StudentData data;
   final String username;
-  final String className;
+  final className;
   final String sectionName;
+  final String imagePath;
 
   StudentModel({
     required this.id,
@@ -23,22 +24,23 @@ class StudentModel {
     required this.username,
     required this.className,
     required this.sectionName,
+    required this.imagePath,
   });
 
   factory StudentModel.fromJson(Map<String, dynamic> json) {
     return StudentModel(
-      id: json['id'],
-      userId: UserId.fromJson(json['user_id']),
-      classId: ClassId.fromJson(json['class_id']),
-      sectionId: SectionId.fromJson(json['section_id']),
-      status: json['status'],
-      created: json['created'],
-      modified: json['modified'],
-      data: StudentData.fromJson(json['data']),
-      username: json['username'],
-      className: json['classname'],
-      sectionName: json['section_name'],
-    );
+        id: json['id'],
+        userId: UserId.fromJson(json['user_id']),
+        classId: ClassId.fromJson(json['class_id']),
+        sectionId: SectionId.fromJson(json['section_id']),
+        status: json['status'],
+        created: json['created'],
+        modified: json['modified'],
+        data: StudentData.fromJson(json['data']),
+        username: json['username'],
+        className: json['classname'],
+        sectionName: json['section_name'],
+        imagePath: json['imagepath'] ?? '');
   }
 }
 
@@ -91,6 +93,8 @@ class StudentData {
   final String bloodGroup;
   final String fatherName;
   final String motherName;
+  final contact;
+  final roleNo;
 
   StudentData({
     required this.dob,
@@ -99,16 +103,19 @@ class StudentData {
     required this.bloodGroup,
     required this.fatherName,
     required this.motherName,
+    required this.contact,
+    required this.roleNo,
   });
 
   factory StudentData.fromJson(Map<String, dynamic> json) {
     return StudentData(
-      dob: json['dob'],
-      name: json['name'],
-      address: json['address'],
-      bloodGroup: json['bloodgroup'],
-      fatherName: json['fathername'],
-      motherName: json['mothername'],
-    );
+        dob: json['dob'],
+        name: json['name'],
+        address: json['address'],
+        bloodGroup: json['bloodgroup'],
+        fatherName: json['fathername'],
+        motherName: json['mothername'] ?? '',
+        contact: json['contact'] ?? '',
+        roleNo: json['role_no'] ?? 'No Role Number');
   }
 }

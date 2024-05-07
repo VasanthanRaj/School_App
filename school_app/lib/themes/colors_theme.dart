@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ThemeColor {
   static const Color white = Color(0xffffffff);
-  static const Color primary = Color(0xFFE9DDC1);
+  static const Color primary = Color(0xFF24476F);
   static const Color black = Color(0x000000);
   static const Color secondaryRed = Color(0xffE2173A);
   static const Color primaryYellow = Color(0xFFF4C744);
@@ -13,9 +13,9 @@ class ThemeColor {
   static const Color primaryGrey = Color(0xFF8D8D8D);
 
   ThemeData get themeData {
-    ColorScheme colorSchemeAbsy = ColorScheme(
+    ColorScheme colorSchemeSchool = ColorScheme(
       // primary green
-      primary: Color(0xFFE9DDC1),
+      primary: Color(0xFF24476F),
       // primary blue
       // primaryVariant: Color(0xffFFE9DDC1),
       // gradient 1
@@ -43,6 +43,6 @@ class ThemeColor {
       brightness: Brightness.light,
     );
 
-    return ThemeData.from(colorScheme: colorSchemeAbsy);
+    return ThemeData.from(colorScheme: colorSchemeSchool);
   }
 }

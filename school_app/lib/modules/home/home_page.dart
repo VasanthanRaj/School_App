@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             actions: [
+
               Container(
                 width: 39,
                 height: 38,

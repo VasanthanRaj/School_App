@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:school_app/data/models/class_models.dart';
 import 'package:school_app/data/models/section_model.dart';
@@ -38,6 +40,11 @@ class StudentController extends GetxController {
   int limit = 10;
 
   bool isLoading = false;
+
+  //files
+  File? imagefile;
+  final ImagePicker picker = ImagePicker();
+  XFile? imageFilePath;
 
   @override
   void onInit() {
@@ -86,5 +93,29 @@ class StudentController extends GetxController {
         }
       }
     });
+  }
+
+  getFromGallery() async {
+    final XFile? selectedImages = await picker.pickImage(source: ImageSource.gallery);
+    if (selectedImages!.isBlank != true) {
+      print(selectedImages!);
+      // imageFileList!.addAll(selectedImages);
+    }
+    // isImageIconVisible = true;
+    // galleryImage = true;
+    update();
+  }
+
+  getFromCamera() async {
+    // Pick an image
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+    imageFilePath = image;
+    if (imageFilePath.isBlank != true) {
+      print(image!);
+      // imageFileList?.add(image!);
+    }
+    // isImageIconVisible = true;
+    // galleryImage = false;
+    update();
   }
 }
