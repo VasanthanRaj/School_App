@@ -1,6 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:school_app/modules/home/widget/dataUpload.dart';
 import 'package:school_app/themes/colors_theme.dart';
 import 'package:school_app/utils/image_assets.dart';
 
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
                       child: const Center(
                         child: Text(
                           "Standard",
-                          style: TextStyle(fontSize: 32),
+                          style: TextStyle(fontSize: 32, color: ThemeColor.white),
                         ),
                       ),
                     ),
@@ -149,14 +150,16 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
+                          MaterialStateProperty.all<Color>(Colors.white),
                       minimumSize:
                           MaterialStateProperty.all(const Size(240, 47.0)),
                     ),
-                    onPressed: () async {},
+                    onPressed: () {
+                      Get.dialog(DataUpload());
+                    },
                     child: const Text(
-                      "Delete Bulk Upload",
-                      style: TextStyle(fontSize: 24, color: Colors.white),
+                      "Upload Bulk Data",
+                      style: TextStyle(fontSize: 24, color: ThemeColor.primary),
                     )),
                 const SizedBox(
                   height: 10,
@@ -165,11 +168,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
               mini: true,
               shape: const CircleBorder(),
               onPressed: () {},
-              child: Icon(Icons.add)),
+              child: const Icon(Icons.add, color: ThemeColor.primary,)),
         ),
       ),
     );

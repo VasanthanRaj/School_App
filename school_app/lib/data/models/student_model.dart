@@ -116,6 +116,6 @@ class StudentData {
         fatherName: json['fathername'],
         motherName: json['mothername'] ?? '',
         contact: json['contact'] ?? '',
-        roleNo: json['role_no'] ?? 'No Role Number');
+        roleNo: json['rollno'] ?? 'No Role Number');
   }
 }

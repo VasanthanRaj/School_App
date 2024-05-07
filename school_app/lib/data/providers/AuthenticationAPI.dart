@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:school_app/utils/constant.dart';
 
-import '../../utils/local_storage.dart';
 import '../../widgets/snackbars.dart';
 
 class AuthenticationAPI {

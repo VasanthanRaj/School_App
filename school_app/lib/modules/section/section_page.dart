@@ -34,7 +34,10 @@ class SectionPage extends StatelessWidget {
                           child: const Center(
                             child: Text(
                               "Sections",
-                              style: TextStyle(fontSize: 32),
+                              style: TextStyle(
+                                  fontSize: 32,
+                                  color: ThemeColor.white,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),
@@ -104,7 +107,10 @@ class SectionPage extends StatelessWidget {
                                                                 1]
                                                             .name,
                                                         style: const TextStyle(
-                                                            fontSize: 24),
+                                                            fontSize: 40,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
                                                       ),
                                                     ),
                                                   )
@@ -119,25 +125,29 @@ class SectionPage extends StatelessWidget {
                         ),
                       ],
                     )),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // Adjust the radius as needed
+                    if (controller.isEdit)
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10.0), // Adjust the radius as needed
+                              ),
                             ),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            minimumSize:
+                                MaterialStateProperty.all(const Size(30, 47.0)),
                           ),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.black),
-                          minimumSize:
-                              MaterialStateProperty.all(const Size(30, 47.0)),
-                        ),
-                        onPressed: () async {},
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        )),
+                          onPressed: () async {},
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: ThemeColor.primary,
+                                fontWeight: FontWeight.w500),
+                          )),
                     const SizedBox(
                       height: 10,
                     ),
@@ -147,11 +157,14 @@ class SectionPage extends StatelessWidget {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
               mini: true,
               shape: const CircleBorder(),
               onPressed: () {},
-              child: Icon(Icons.add)),
+              child: const Icon(
+                Icons.add,
+                color: ThemeColor.primary,
+              )),
         ),
       ),
     );

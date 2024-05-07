@@ -101,6 +101,7 @@ class GetAPI {
   }
 
   Future<dynamic> studentAPI({required classId, required sectionId, required page, required size}) async {
+    print("URL = ${'$baseUrl$studentsDetails${localStorage.userId}/$classId/$sectionId?size=$size&page=$page'} Page =  ${page}");
     try {
       final http.Response response = await http.get(
         Uri.parse('$baseUrl$studentsDetails${localStorage.userId}/$classId/$sectionId?size=$size&page=$page'),
@@ -111,11 +112,11 @@ class GetAPI {
       );
 
       if (response.statusCode == 200) {
+        print("11111111111111111111111111111111");
         print(response.body);
         var result = jsonDecode(response.body);
         return result;
       } else {
-        print('Login failed: ${response.body}');
         SnackNotification.error(
           message: response.body,
         );

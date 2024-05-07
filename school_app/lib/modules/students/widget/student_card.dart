@@ -121,7 +121,7 @@ class StudentCard extends StatelessWidget {
                                                       elevation: 2,
                                                       onPressed: () {
                                                         controller
-                                                        .getFromCamera();
+                                                            .getFromCamera();
                                                         Get.back();
                                                       },
                                                       tooltip:
@@ -136,7 +136,8 @@ class StudentCard extends StatelessWidget {
                                                   Text(
                                                     'Camera',
                                                     style: TextStyle(
-                                                        fontWeight: FontWeight.w500),
+                                                        fontWeight:
+                                                            FontWeight.w500),
                                                   ),
                                                 ],
                                               ),
@@ -146,7 +147,8 @@ class StudentCard extends StatelessWidget {
                                                   child: FloatingActionButton(
                                                     elevation: 2,
                                                     onPressed: () {
-                                                      controller.getFromGallery();
+                                                      controller
+                                                          .getFromGallery();
                                                       Get.back();
                                                     },
                                                     tooltip:
@@ -161,7 +163,8 @@ class StudentCard extends StatelessWidget {
                                                 Text(
                                                   'Gallery',
                                                   style: TextStyle(
-                                                      fontWeight: FontWeight.w500),
+                                                      fontWeight:
+                                                          FontWeight.w500),
                                                 ),
                                               ]),
                                             ],
@@ -201,7 +204,8 @@ class StudentCard extends StatelessWidget {
   Widget BageTitle(String title) {
     return Text(
       title,
-      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      style: const TextStyle(
+          fontSize: 16, fontWeight: FontWeight.w500, color: ThemeColor.white),
     );
   }
 
@@ -209,9 +213,7 @@ class StudentCard extends StatelessWidget {
     return Text(
       title,
       overflow: TextOverflow.clip,
-      style: const TextStyle(
-        fontSize: 16,
-      ),
+      style: const TextStyle(fontSize: 16, color: ThemeColor.white),
     );
   }
 }

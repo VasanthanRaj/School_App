@@ -1,22 +1,14 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:school_app/data/models/class_models.dart';
-import 'package:school_app/data/models/section_model.dart';
 import 'package:school_app/data/models/student_model.dart';
 import 'package:school_app/data/providers/GetAPI.dart';
 import 'package:school_app/modules/home/home_controller.dart';
 import 'package:school_app/modules/section/section_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../routes/app_routes.dart';
 import '../../utils/local_storage.dart';
-import '../../widgets/network_error_item.dart';
 
 class StudentController extends GetxController {
   //API
@@ -78,7 +70,7 @@ class StudentController extends GetxController {
     scrollController.addListener(() async {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        page = page++;
+        page = page + 1;
         update();
         var results = await getAPI.studentAPI(
           page: page,
@@ -86,8 +78,10 @@ class StudentController extends GetxController {
           classId: homeController.classId.value,
           sectionId: sectionController.secId.value,
         );
+        print("************************************" + "PAges Updated = ${page}");
+        print(results);
         if (results != null && !results.isEmpty) {
-          results.forEach(
+          results['posts'].forEach(
             (result) => studentModel.add(StudentModel.fromJson(result)),
           );
         }
@@ -96,9 +90,10 @@ class StudentController extends GetxController {
   }
 
   getFromGallery() async {
-    final XFile? selectedImages = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? selectedImages =
+        await picker.pickImage(source: ImageSource.gallery);
     if (selectedImages!.isBlank != true) {
-      print(selectedImages!);
+      print(selectedImages);
       // imageFileList!.addAll(selectedImages);
     }
     // isImageIconVisible = true;
